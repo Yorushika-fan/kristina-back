@@ -1,0 +1,6 @@
+rootProject.name = 'Kwriting'
+include 'Kwriting-admin'
+include 'Kwriting-core'
+include 'Kwriting-service'
+include 'Kwriting-basic'
+

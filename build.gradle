@@ -1,0 +1,133 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    wrapper{
+        gradleVersion = '8.0.2'
+    }
+}
+
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.3'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'java-library'
+}
+group = 'top.kristina'
+version = '1.0-SNAPSHOT'
+
+tasks.bootJar{
+    enabled = false
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply  plugin:  'org.springframework.boot'
+    apply  plugin:  'io.spring.dependency-management'
+    apply  plugin: 'java-library'
+    repositories {
+        mavenCentral()
+    }
+
+    processResources {
+        from('src/main/java') {
+            include '**/*.xml'
+        }
+    }
+
+
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+    dependencies {
+        runtimeOnly 'org.slf4j:slf4j-api:2.0.12'
+        compileOnly 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor('org.projectlombok:lombok:1.18.30')
+        implementation "com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.5.0"
+        annotationProcessor 'com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter:4.5.0'
+        implementation 'cn.hutool:hutool-all:5.8.26'
+        runtimeOnly 'org.springframework.boot:spring-boot-starter-test'
+
+
+    }
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+    tasks.bootJar{
+        enabled = false
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = "UTF-8"
+        options.release = 17
+    }
+    test {
+        useJUnitPlatform()
+    }
+
+}
+
+
+
+project(":Kwriting-core"){
+    dependencies {
+        compileOnly 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.5'
+        implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+        implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+    }
+}
+
+project(':Kwriting-basic'){
+    dependencies {
+        implementation project(':Kwriting-core')
+        api 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.5'
+        compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+        compileOnly 'org.springframework.boot:spring-boot-starter-security'
+    }
+}
+project(':Kwriting-service'){
+
+    dependencies {
+        implementation project(':Kwriting-basic')
+        implementation project(":Kwriting-core")
+        implementation 'javax.validation:validation-api:2.0.1.Final'
+        runtimeOnly 'com.mysql:mysql-connector-j:8.3.0'
+        implementation  'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.apache.commons:commons-pool2'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    }
+
+
+}
+
+project(':Kwriting-admin'){
+    dependencies {
+        implementation project(":Kwriting-service")
+        implementation project(":Kwriting-core")
+        implementation project(':Kwriting-basic')
+        implementation  'org.springframework.boot:spring-boot-starter-web'
+        compileOnly 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.5'
+        implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    }
+
+    tasks.bootJar{
+        enabled = true
+        mainClass.set( 'top.kristina.admin.adminApplication')
+
+    }
+
+}
+
+
+
+

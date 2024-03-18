@@ -1,0 +1,14 @@
+
+l	java:S116"QRename this field "SECRET" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®Ùµ08ˆ¶Šªã1
+R
+java:S18748"5Remove this use of "setSigningKey"; it is deprecated.(ëöâ‡8¶Šªã1
+S
+java:S1874O"1Remove this use of "setClaims"; it is deprecated.(æõíûúÿÿÿÿ8¶Šªã1
+R
+java:S1874P"5Remove this use of "setExpiration"; it is deprecated.(²è÷Ï8¶Šªã1
+R
+java:S1874Q"0Remove this use of "signWith"; it is deprecated.(Ôíé ûÿÿÿÿ8¶Šªã1
+\
+java:S1874Q":Remove this use of "SignatureAlgorithm"; it is deprecated.(Ôíé ûÿÿÿÿ8¶Šªã1
+\
+java:S1874Q":Remove this use of "SignatureAlgorithm"; it is deprecated.(Ôíé ûÿÿÿÿ8¶Šªã1

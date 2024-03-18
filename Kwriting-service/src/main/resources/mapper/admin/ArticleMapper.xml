@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.kristina.service.admin.system.mapper.ArticleMapper">
+  <resultMap id="BaseResultMap" type="top.kristina.service.admin.system.model.entity.Article">
+    <!--@mbg.generated-->
+    <!--@Table blog_article-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="cover_pic" jdbcType="VARCHAR" property="coverPic" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="article_views" jdbcType="BIGINT" property="articleViews" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, title, url, cover_pic, content, category_id, category_name, `status`, deleted, 
+    article_views, create_by, create_time, update_by, update_time
+  </sql>
+</mapper>

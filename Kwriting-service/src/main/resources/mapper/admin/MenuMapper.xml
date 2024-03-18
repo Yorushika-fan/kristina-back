@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.kristina.service.admin.system.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="top.kristina.service.admin.system.model.entity.Menu">
+    <!--@mbg.generated-->
+    <!--@Table ums_menu-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="menu_type" jdbcType="INTEGER" property="menuType" />
+    <result column="perms" jdbcType="VARCHAR" property="perms" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, parent_id, menu_name, sort, menu_type, perms, icon, deleted, create_time, update_time
+  </sql>
+
+  <select id="selectMenuByRoleId" resultType="top.kristina.service.admin.system.model.entity.Menu">
+    select m.id,
+    m.parent_id,
+    m.menu_name,
+    m.sort,
+    m.perms,
+    m.menu_type,
+    m.icon,
+    m.deleted,
+    m.create_time,
+    m.update_time
+    from ums_menu m left join ums_role_menu urm on m.id = urm.menu_id
+    where urm.role_id in
+    <foreach collection="roleIds" open="(" close=")" separator="," item="roleId">
+      #{roleId}
+    </foreach>
+  </select>
+</mapper>
